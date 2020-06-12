@@ -4,9 +4,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application>
         <provider
-            android:authorities="P_AUTHORITY"
+            android:authorities="${applicationId}.networkProvider"
             android:name=".v2.provider.NetworkProvider"
-            android:exported="true"
+            android:exported="false"
             android:enabled="true"/>
     </application>
 </manifest>
