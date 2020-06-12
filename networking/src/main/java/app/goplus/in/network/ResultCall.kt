@@ -1,5 +1,6 @@
 package app.goplus.`in`.network
 
+import app.goplus.`in`.v2.models.Result
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +17,12 @@ class ResultCall<T>(proxy: Call<T>) : CallDelegate<T, Result<*>>(proxy) {
                 val body = response.body()
                 if (body is Result<*>) {
                     // creating new result for the responses where data is sent but isSuccess is false
-                    Result(data = body.data, cached = body.cached, message = body.message, throwable = null)
+                    Result(
+                        data = body.data,
+                        cached = body.cached,
+                        message = body.message,
+                        throwable = null
+                    )
                 } else {
                     Result.success(body)
                 }

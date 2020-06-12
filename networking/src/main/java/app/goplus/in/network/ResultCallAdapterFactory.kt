@@ -1,5 +1,6 @@
 package app.goplus.`in`.network
 
+import app.goplus.`in`.v2.models.Result
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

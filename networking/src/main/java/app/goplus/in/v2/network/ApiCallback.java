@@ -5,7 +5,7 @@ import android.content.Context;
 import java.io.IOException;
 import java.net.SocketException;
 
-import app.goplus.in.network.Result;
+import app.goplus.in.v2.models.Result;
 import app.goplus.in.v2.ErrorMessagesN;
 import app.goplus.in.v2.models.ErrorData;
 import app.goplus.in.v2.utils.NetworkUtils;
