@@ -15,9 +15,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
 
-        // GOOGLE DIRECTIONS
-        resValue "string", "GOOGLE_DIRECTIONS_API_KEY_PREFIX", "AIzaSyDEBqDnEGW3tGY"
-        resValue "string", "GOOGLE_DIRECTIONS_API_KEY_SUFFIX", "4n8MjM3Hsxe0hZZIQDLM"
     }
 
     buildTypes {

@@ -122,9 +122,7 @@ private class GoogleRequestHeaderInterceptor internal constructor(private val co
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
 
-        val apiKey = context.resources.getString(R.string.GOOGLE_DIRECTIONS_API_KEY_PREFIX) + context.resources.getString(R.string.GOOGLE_DIRECTIONS_API_KEY_SUFFIX)
-
-        val url = request.url().newBuilder().addQueryParameter("key", apiKey).build()
+        val url = request.url().newBuilder().addQueryParameter("key", Network.getGoogleKey()).build()
         request = request.newBuilder().url(url).build()
         return chain.proceed(request)
     }

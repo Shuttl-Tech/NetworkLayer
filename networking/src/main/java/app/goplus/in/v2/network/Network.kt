@@ -24,6 +24,10 @@ class Network {
         fun reValidateUser(context: Context, code: Int) {
             moduleDependency.reValidateUer(context, code)
         }
+
+        fun getGoogleKey(): String? {
+            return moduleDependency.getGoogleKeys()
+        }
     }
 }
 
@@ -31,4 +35,5 @@ interface ModuleDependency {
     fun getBaseUrl(type: String): String
     fun getHeaders(): HashMap<String, String>
     fun reValidateUer(context: Context, code: Int)
+    fun getGoogleKeys(): String?
 }
