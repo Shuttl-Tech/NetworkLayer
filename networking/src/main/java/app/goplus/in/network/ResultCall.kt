@@ -1,40 +1,40 @@
 package app.goplus.`in`.network
 
-import app.goplus.`in`.v2.models.Result
+import app.goplus.`in`.v2.models.ApiResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.HttpURLConnection
 
-class ResultCall<T>(proxy: Call<T>) : CallDelegate<T, Result<*>>(proxy) {
+class ResultCall<T>(proxy: Call<T>) : CallDelegate<T, ApiResult<*>>(proxy) {
 
     override fun cloneImpl() = ResultCall(proxy.clone())
 
-    override fun enqueueImpl(callback: Callback<Result<*>>) = proxy.enqueue(object : Callback<T> {
+    override fun enqueueImpl(callback: Callback<ApiResult<*>>) = proxy.enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
             val code = response.code()
             val result = if (code in HttpURLConnection.HTTP_OK until HttpURLConnection.HTTP_MULT_CHOICE) {
                 val body = response.body()
-                if (body is Result<*>) {
+                if (body is ApiResult<*>) {
                     // creating new result for the responses where data is sent but isSuccess is false
-                    Result(
+                    ApiResult(
                         data = body.data,
                         cached = body.cached,
                         message = body.message,
                         throwable = null
                     )
                 } else {
-                    Result.success(body)
+                    ApiResult.success(body)
                 }
             } else {
-                Result.error(message = response.message(), responseCode = code)
+                ApiResult.error(message = response.message(), responseCode = code)
             }
 
             callback.onResponse(this@ResultCall, Response.success(result))
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
-            val result = Result.error(data = null, message = t.message ?: "", throwable = t)
+            val result = ApiResult.error(data = null, message = t.message ?: "", throwable = t)
             callback.onResponse(this@ResultCall, Response.success(result))
         }
     })

@@ -1,6 +1,6 @@
 package app.goplus.`in`.v2.models
 
-data class Result<T>(
+data class ApiResult<T>(
         val data: T? = null,
         val success: Boolean? = data != null,
         val cached: Boolean? = null,
@@ -11,16 +11,16 @@ data class Result<T>(
         val warningDTO: WarningDTO? = null,
         val throwable: Throwable? = null) {
     companion object {
-        fun <T> success(data: T?,title: String? = null, message: String? = null): Result<T> {
-            return Result(
+        fun <T> success(data: T?,title: String? = null, message: String? = null): ApiResult<T> {
+            return ApiResult(
                 data,
                 title = title,
                 message = message
             )
         }
 
-        fun <T> error(data: T? = null, message: String?, errorCode: String? = null, responseCode: Int? = 0, warningDTO: WarningDTO? = null, throwable: Throwable? = null): Result<T> {
-            return Result(
+        fun <T> error(data: T? = null, message: String?, errorCode: String? = null, responseCode: Int? = 0, warningDTO: WarningDTO? = null, throwable: Throwable? = null): ApiResult<T> {
+            return ApiResult(
                 data = data,
                 success = false,
                 errorCode = errorCode,

@@ -5,7 +5,7 @@ import android.content.Context;
 import java.io.IOException;
 import java.net.SocketException;
 
-import app.goplus.in.v2.models.Result;
+import app.goplus.in.v2.models.ApiResult;
 import app.goplus.in.v2.ErrorMessagesN;
 import app.goplus.in.v2.models.ErrorData;
 import app.goplus.in.v2.utils.NetworkUtils;
@@ -23,7 +23,7 @@ import retrofit2.Response;
      onApiFailure - if isSuccess false from server api call
       onError - if onFailure if retrofit onFailure is Called
 * */
-public abstract class ApiCallback<T extends Result> implements Callback<T> {
+public abstract class ApiCallback<T extends ApiResult> implements Callback<T> {
 
     public static final String STATUS_SUCCESS = "Success",
             STATUS_FAILURE = "Failure",
@@ -59,7 +59,7 @@ public abstract class ApiCallback<T extends Result> implements Callback<T> {
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         if (NetworkUtils.isCallSuccess(getContext(), response)) {
-            Result baseApiResponse = response.body();
+            ApiResult baseApiResponse = response.body();
             if (baseApiResponse.getSuccess()) {
                 onApiSuccess(response.body());
             } else {
@@ -75,7 +75,7 @@ public abstract class ApiCallback<T extends Result> implements Callback<T> {
     }
 
 
-    private void callApiFailure(Result baseApiResponse) {
+    private void callApiFailure(ApiResult baseApiResponse) {
         onApiFailure(new ApiFailure(baseApiResponse.getErrorCode(), baseApiResponse.getMessage(),
                 baseApiResponse.getTitle(), baseApiResponse.getData(),
                 new ErrorData(baseApiResponse.getMessage(), baseApiResponse.getErrorCode(),
