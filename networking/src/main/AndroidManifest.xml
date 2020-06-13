@@ -1,12 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.goplus.in" >
+    package="app.goplus.lib" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <application>
-        <provider
-            android:authorities="${applicationId}.networkProvider"
-            android:name=".v2.provider.NetworkProvider"
-            android:exported="false"
-            android:enabled="true"/>
-    </application>
 </manifest>
