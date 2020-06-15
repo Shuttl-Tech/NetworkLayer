@@ -153,8 +153,10 @@ private class RequestHeaderInterceptor internal constructor() : Interceptor {
                 .addHeader("deviceManufacturer", Build.MANUFACTURER)
                 .addHeader("deviceVersion", Build.VERSION.SDK_INT.toString())
 
-        for (pair in Network.getHeaders()){
-            builder.addHeader(pair.key, pair.value)
+        Network.getHeaders()?.let {
+            for (pair in it) {
+                builder.addHeader(pair.key, pair.value)
+            }
         }
 
         return chain.proceed(builder.build())

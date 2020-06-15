@@ -16,7 +16,7 @@ class Network {
             return return moduleDependency.getBaseUrl(type)
         }
 
-        fun getHeaders(): HashMap<String, String> {
+        fun getHeaders(): HashMap<String, String>? {
             return moduleDependency.getHeaders()
         }
 
@@ -34,7 +34,7 @@ class Network {
 
 interface ModuleDependency {
     fun getBaseUrl(type: String): String
-    fun getHeaders(): HashMap<String, String>
+    fun getHeaders(): HashMap<String, String>?
     fun reValidateUer(context: Context, code: Int)
     fun getGoogleKeys(): String?
     fun getAppContext(): Context
