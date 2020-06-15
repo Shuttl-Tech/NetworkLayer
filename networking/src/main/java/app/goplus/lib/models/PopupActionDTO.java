@@ -1,9 +1,9 @@
-package app.goplus.lib.v2.models;
+package app.goplus.lib.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import app.goplus.lib.v2.utils.appConfig.butler.ActionDTO;
+import app.goplus.lib.utils.butler.ActionDTO;
 
 /**
  * Created by ankitmaheswari on 28/08/17.

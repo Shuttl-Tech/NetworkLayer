@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.network
+package app.goplus.lib.network
 
 const val NO_SERVER_ERROR = 0
 const val GENERIC_ERROR = "SOMETHING_WENT_WRONG"

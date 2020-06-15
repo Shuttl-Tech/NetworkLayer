@@ -1,6 +1,6 @@
-package app.goplus.lib.network
+package app.goplus.lib.custom
 
-import app.goplus.lib.v2.models.ApiResult
+import app.goplus.lib.models.ApiResult
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

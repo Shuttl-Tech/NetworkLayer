@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.network
+package app.goplus.lib.network
 
 import android.content.Context
 
@@ -22,8 +22,8 @@ class Network {
 
         fun getStringFromRes(resId: Int) = context?.getString(resId)
 
-        fun reValidateUser(context: Context, code: Int) {
-            moduleDependency.reValidateUer(context, code)
+        fun reValidateUser(code: Int) {
+            moduleDependency.reValidateUer(code)
         }
 
         fun getGoogleKey(): String? {
@@ -35,7 +35,7 @@ class Network {
 interface ModuleDependency {
     fun getBaseUrl(type: String): String
     fun getHeaders(): HashMap<String, String>?
-    fun reValidateUer(context: Context, code: Int)
+    fun reValidateUer(code: Int)
     fun getGoogleKeys(): String?
     fun getAppContext(): Context
 }

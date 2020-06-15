@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.network
+package app.goplus.lib.network
 
 const val ENV_RELEASE = "RELEASE"
 const val ENV_QA = "QA"

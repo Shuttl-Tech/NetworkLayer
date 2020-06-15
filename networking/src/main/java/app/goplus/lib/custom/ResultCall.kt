@@ -1,6 +1,7 @@
-package app.goplus.lib.network
+package app.goplus.lib.custom
 
-import app.goplus.lib.v2.models.ApiResult
+import app.goplus.lib.models.ApiResult
+import app.goplus.lib.network.Network
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,12 +20,15 @@ class ResultCall<T>(proxy: Call<T>) : CallDelegate<T, ApiResult<*>>(proxy) {
                     // creating new result for the responses where data is sent but isSuccess is false
                     ApiResult(
                         data = body.data,
+                        title = body.title,
                         cached = body.cached,
                         message = body.message,
-                        throwable = null
+                        throwable = null,
+                        responseCode = code
                     )
                 } else {
-                    ApiResult.success(body)
+                    Network.reValidateUser(code)
+                    ApiResult.success(body, responseCode = code)
                 }
             } else {
                 ApiResult.error(message = response.message(), responseCode = code)

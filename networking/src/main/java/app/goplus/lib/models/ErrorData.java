@@ -1,7 +1,7 @@
-package app.goplus.lib.v2.models;
+package app.goplus.lib.models;
 
-import app.goplus.lib.v2.ErrorMessagesN;
-import app.goplus.lib.v2.network.ErrorCodesNKt;
+import app.goplus.lib.utils.ErrorMessagesN;
+import app.goplus.lib.network.ErrorCodesNKt;
 
 /**
  * Created by ankitmaheswari on 31/05/16.

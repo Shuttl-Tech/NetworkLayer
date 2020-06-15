@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.network
+package app.goplus.lib.network
 
 interface KeyType {
     companion object {

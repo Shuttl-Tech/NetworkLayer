@@ -1,7 +1,7 @@
-package app.goplus.lib.v2;
+package app.goplus.lib.utils;
 
 import app.goplus.lib.R;
-import app.goplus.lib.v2.network.Network;
+import app.goplus.lib.network.Network;
 
 /**
  * Created by ankitsharma on 3/2/16.
