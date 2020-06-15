@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.utils;
+package app.goplus.lib.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -17,11 +17,11 @@ import java.util.List;
 
 import javax.net.ssl.SSLException;
 
-import app.goplus.lib.v2.ErrorMessagesN;
-import app.goplus.lib.v2.helpers.NoConnectivityException;
-import app.goplus.lib.v2.models.ErrorData;
-import app.goplus.lib.v2.network.ErrorCodesNKt;
-import app.goplus.lib.v2.network.Network;
+import app.goplus.lib.helpers.NoConnectivityException;
+import app.goplus.lib.models.ErrorData;
+import app.goplus.lib.network.ErrorCodesNKt;
+import app.goplus.lib.network.Network;
+import app.goplus.lib.utils.ErrorMessagesN;
 import retrofit2.Response;
 
 /**
@@ -95,7 +95,7 @@ public class NetworkUtils {
 
         //in case some auth issue occurred
         if (shouldRevalidate && (code == 406 || code == 455 || code == 456 || code == 457)  ) {
-            Network.Companion.reValidateUser(context, code);
+            Network.Companion.reValidateUser(code);
         }
         return false;
     }

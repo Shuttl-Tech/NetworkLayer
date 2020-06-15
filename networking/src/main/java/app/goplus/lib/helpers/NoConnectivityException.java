@@ -1,8 +1,8 @@
-package app.goplus.lib.v2.helpers;
+package app.goplus.lib.helpers;
 
 import java.io.IOException;
 
-import app.goplus.lib.v2.ErrorMessagesN;
+import app.goplus.lib.utils.ErrorMessagesN;
 
 /**
  * Created by Ankit Maheswari on 05/09/18.

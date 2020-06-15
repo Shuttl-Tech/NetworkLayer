@@ -1,14 +1,14 @@
-package app.goplus.lib.v2.network;
+package app.goplus.lib.network;
 
 import android.content.Context;
 
 import java.io.IOException;
 import java.net.SocketException;
 
-import app.goplus.lib.v2.models.ApiResult;
-import app.goplus.lib.v2.ErrorMessagesN;
-import app.goplus.lib.v2.models.ErrorData;
-import app.goplus.lib.v2.utils.NetworkUtils;
+import app.goplus.lib.models.ApiResult;
+import app.goplus.lib.utils.ErrorMessagesN;
+import app.goplus.lib.models.ErrorData;
+import app.goplus.lib.utils.NetworkUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

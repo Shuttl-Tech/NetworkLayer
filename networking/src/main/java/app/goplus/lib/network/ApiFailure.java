@@ -1,6 +1,6 @@
-package app.goplus.lib.v2.network;
+package app.goplus.lib.network;
 
-import app.goplus.lib.v2.models.ErrorData;
+import app.goplus.lib.models.ErrorData;
 
 /**
  * Created by rohitsingh on 13/06/16.

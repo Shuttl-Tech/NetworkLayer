@@ -1,15 +1,15 @@
-package app.goplus.lib.v2.network
+package app.goplus.lib.network
 
 import android.content.Context
 import android.os.Build
 import app.goplus.lib.BuildConfig
-import app.goplus.lib.v2.helpers.NoConnectivityException
-import app.goplus.lib.v2.network.KeyType.Companion.googleReactive
-import app.goplus.lib.v2.network.KeyType.Companion.normal
-import app.goplus.lib.v2.network.KeyType.Companion.reactive
-import app.goplus.lib.v2.network.KeyType.Companion.simple
-import app.goplus.lib.v2.utils.NetworkUtils
-import app.goplus.lib.network.ResultCallAdapterFactory
+import app.goplus.lib.helpers.NoConnectivityException
+import app.goplus.lib.network.KeyType.Companion.googleReactive
+import app.goplus.lib.network.KeyType.Companion.normal
+import app.goplus.lib.network.KeyType.Companion.reactive
+import app.goplus.lib.network.KeyType.Companion.simple
+import app.goplus.lib.utils.NetworkUtils
+import app.goplus.lib.custom.ResultCallAdapterFactory
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

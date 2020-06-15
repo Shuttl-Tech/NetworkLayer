@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.models
+package app.goplus.lib.models
 
 data class ApiResult<T>(
     val data: T? = null,
@@ -9,9 +9,17 @@ data class ApiResult<T>(
     val message: String? = null,
     val title: String? = null,
     val warningDTO: WarningDTO? = null,
-    val throwable: Throwable? = null) {
+    val throwable: Throwable? = null
+) {
     companion object {
-        fun <T> success(data: T?,title: String? = null, message: String? = null): ApiResult<T> {
+        fun <T> success(
+            data: T?,
+            title: String? = null,
+            message: String? = null,
+            errorCode: String? = null,
+            responseCode: Int? = 0,
+            warningDTO: WarningDTO? = null
+        ): ApiResult<T> {
             return ApiResult(
                 data,
                 title = title,
@@ -19,7 +27,14 @@ data class ApiResult<T>(
             )
         }
 
-        fun <T> error(data: T? = null, message: String?, errorCode: String? = null, responseCode: Int? = 0, warningDTO: WarningDTO? = null, throwable: Throwable? = null): ApiResult<T> {
+        fun <T> error(
+            data: T? = null,
+            message: String?,
+            errorCode: String? = null,
+            responseCode: Int? = 0,
+            warningDTO: WarningDTO? = null,
+            throwable: Throwable? = null
+        ): ApiResult<T> {
             return ApiResult(
                 data = data,
                 success = false,
