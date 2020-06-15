@@ -1,10 +1,10 @@
-package app.goplus.lib.v2.provider
+package app.goplus.lib.provider
 
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import app.goplus.lib.v2.network.Network
+import app.goplus.lib.network.Network
 
 class NetworkProvider: ContentProvider() {
     val authority = "app.goplus.in.provider.NetworkProvider"

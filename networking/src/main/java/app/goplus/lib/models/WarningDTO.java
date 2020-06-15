@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.models;
+package app.goplus.lib.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

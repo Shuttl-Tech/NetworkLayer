@@ -1,4 +1,4 @@
-package app.goplus.lib.network
+package app.goplus.lib.custom
 
 import okhttp3.Request
 import retrofit2.Call

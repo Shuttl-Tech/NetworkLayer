@@ -1,4 +1,4 @@
-package app.goplus.lib.v2.utils.appConfig.butler;
+package app.goplus.lib.utils.butler;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
