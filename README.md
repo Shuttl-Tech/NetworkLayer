@@ -37,7 +37,7 @@ dependencies {
 To setup Network Layer, app needs to init the Network Layer by adding `Network.init()` and passing in the implementation of `ModuleDependency` interface
 
 ```kotlin
-Network.init(object : ModuleDependencyImpl{...})
+Network.init(object : ModuleDependency{...})
 ```
 App needs to add following permissions in app's `AndroidManifest` root
 
