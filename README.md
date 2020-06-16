@@ -1,8 +1,8 @@
 # Network Layer
 
-![Build Status](https://travis-ci.org/ChuckerTeam/chucker.svg?branch=master) ![License](https://img.shields.io/github/license/ChuckerTeam/Chucker.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](http://makeapullrequest.com)
+![Build Status](https://travis-ci.org/ChuckerTeam/chucker.svg?branch=master)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](http://makeapullrequest.com)
 
-A thin wrapper over retrofit and provides some extra functionality  
+A thin wrapper over retrofit that provides some extra functionality  
 
 * [Getting Started](#getting-started-)
 * [Features](#features-)
@@ -72,6 +72,7 @@ and with this you will start getting the expected response or handled error wrap
 ## Features 🧰
 
 * Uses **OkHTTP 4** | **Retrofit**
+* **Coroutine** compatible
 * **API >= 16** compatible
 * Handles errors and passes in **ApiResult**
 * Callbacks to handle **User Validations**
