@@ -10,6 +10,7 @@ import app.goplus.lib.network.KeyType.Companion.normal
 import app.goplus.lib.network.KeyType.Companion.reactive
 import app.goplus.lib.network.KeyType.Companion.simple
 import app.goplus.lib.utils.NetworkUtils
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -107,7 +108,7 @@ private fun getInterceptor(objType: String, context: Context): List<Interceptor>
         }
     }
     intercepters.add(logging)
-//    intercepters.add(ChuckerInterceptor(context))
+    intercepters.add(ChuckerInterceptor(context))
     return intercepters
 }
 

@@ -1,11 +1,11 @@
 package app.goplus.testmodule
 
-import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 import app.goplus.lib.network.ModuleDependency
 import app.goplus.lib.network.Network
 
-class TestApplication : Application() {
+class TestApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         Network.init(object : ModuleDependency {
