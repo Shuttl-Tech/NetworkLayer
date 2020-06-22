@@ -53,6 +53,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation project(path: ':networking')
-//    api 'com.github.Shuttl-Tech:NetworkLayer:retry'
+//    implementation 'com.github.Shuttl-Tech:NetworkLayer:retry2'
     implementation "androidx.multidex:multidex:2.0.1"
 }
