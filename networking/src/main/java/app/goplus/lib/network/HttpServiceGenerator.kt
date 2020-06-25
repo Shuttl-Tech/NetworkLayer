@@ -2,7 +2,6 @@ package app.goplus.lib.network
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import app.goplus.lib.BuildConfig
 import app.goplus.lib.custom.ResultCallAdapterFactory
 import app.goplus.lib.helpers.NoConnectivityException
@@ -11,7 +10,6 @@ import app.goplus.lib.network.KeyType.Companion.normal
 import app.goplus.lib.network.KeyType.Companion.reactive
 import app.goplus.lib.network.KeyType.Companion.simple
 import app.goplus.lib.utils.NetworkUtils
-import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -114,10 +112,8 @@ private fun getInterceptor(objType: String, context: Context): List<Interceptor>
         }
     }
     intercepters.add(logging)
-//    val buildType = getBuildConfigValue("BUILD_TYPE")
-//    Log.e("RetryLog", "build varient= ${BuildConfig.BUILD_TYPE}   $buildType")
-    if (!BuildConfig.BUILD_TYPE.equals(ENV_RELEASE, ignoreCase = true)) {
-        intercepters.add(ChuckerInterceptor(context))
+    for (interceptor in Network.getExtraInterceptors()) {
+        intercepters.add(interceptor)
     }
     return intercepters
 }
