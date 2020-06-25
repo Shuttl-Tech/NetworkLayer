@@ -1,2 +1,2 @@
-include ':app', ':networking', ':testmodule'
+include ':app', ':networking', ':testmodule', ':networking_no_chuck'
 rootProject.name='NetworkLayer'
