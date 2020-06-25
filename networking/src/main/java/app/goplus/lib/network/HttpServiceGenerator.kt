@@ -104,7 +104,9 @@ private fun getInterceptor(objType: String, context: Context): List<Interceptor>
         googleReactive -> intercepters.add(GoogleRequestHeaderInterceptor(context))
         else -> {
             intercepters.add(RequestHeaderInterceptor())
-            intercepters.add(ConnectivityInterceptor(context))
+            if (!BuildConfig.BUILD_TYPE.equals(ENV_RELEASE, ignoreCase = true)) {
+                intercepters.add(ConnectivityInterceptor(context))
+            }
         }
     }
     intercepters.add(logging)
