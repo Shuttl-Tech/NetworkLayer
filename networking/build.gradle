@@ -10,6 +10,9 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "com.shuttltech.networking.library"]
+    }
 
     defaultConfig {
         minSdkVersion 15
