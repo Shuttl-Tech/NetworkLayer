@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 interface TestService {
 
-    @GET("echo/get/json")
+    @GET("https://international-backend.bangkok.shuttltech.com/api/v3/home_cards")
     suspend fun getTestData(): ApiResult<TestModal>
 
     @GET("echo/get/json/")

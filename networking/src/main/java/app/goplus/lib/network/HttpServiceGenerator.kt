@@ -143,25 +143,15 @@ private class GoogleRequestHeaderInterceptor internal constructor(private val co
 private class RequestHeaderInterceptor internal constructor() : Interceptor {
 
 
-    private fun getUserAgentHeader(): String {
-        return String.format(
-            "shuttl-consumer/v%s (Android; %s)",
-            BuildConfig.VERSION_NAME,
-            Build.VERSION.RELEASE
-        )
-    }
-
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 
         var builder = original.newBuilder()
             .header("Accept", "application/json")
-            .addHeader("User-Agent", getUserAgentHeader())
             .addHeader("Accept-Language", Locale.getDefault().toString())
             .addHeader("timezone", TimeZone.getDefault().id)
             .addHeader("platform", "Android")
-            .addHeader("appVersion", BuildConfig.VERSION_CODE.toString())
             .addHeader("deviceModel", Build.MODEL)
             .addHeader("deviceManufacturer", Build.MANUFACTURER)
             .addHeader("deviceVersion", Build.VERSION.SDK_INT.toString())
