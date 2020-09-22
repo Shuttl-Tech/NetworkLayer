@@ -9,7 +9,8 @@ data class ApiResult<T>(
     val message: String? = null,
     val title: String? = null,
     val warningDTO: WarningDTO? = null,
-    val throwable: Throwable? = null
+    val throwable: Throwable? = null,
+    val error: ErrorModel? = null
 ) {
     companion object {
         fun <T> success(
