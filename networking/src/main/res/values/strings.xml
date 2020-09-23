@@ -944,6 +944,9 @@
     <string name="title_add_money">Add Money</string>
     <string name="title_pass_details">Pass Details</string>
     <string name="title_review_route_for">Pass Summary</string>
+    <string name="gps_error_description">Allow Shuttl to turn on your phone GPS for accurate pickup.</string>
+    <string name="gps_error_heading">No Internet connection</string>
+    <string name="gps_error_cta">TURN ON INTERNET</string>
 
     <string name="corporate_account">Corporate Account</string>
     <string name="profile_birthday">Birthday</string>

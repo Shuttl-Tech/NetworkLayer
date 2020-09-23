@@ -1,7 +1,9 @@
 package app.goplus.lib.custom
 
-import app.goplus.lib.models.ApiResult
+import app.goplus.lib.R
+import app.goplus.lib.models.*
 import app.goplus.lib.network.Network
+import app.goplus.lib.utils.NetworkUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,10 +36,16 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                     }
                 } else {
                     Network.reValidateUser(code)
+                    var errorModel: ErrorModel? = null
+                    val body = response.body()
+                    if (body is ApiResult<*>) {
+                        errorModel = body.error
+                    }
                     result = ApiResult.error(
                         data = null,
                         message = response.message(),
-                        responseCode = code
+                        responseCode = code,
+                        error = errorModel
                     )
                 }
 
@@ -48,8 +56,21 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
 
             override fun onFailure(call: Call<T>, t: Throwable) {
                 if (retryPolicy?.retry(proxy, this) != true) {
+                    var errorModel: ErrorModel? = null
+                    if (!NetworkUtils.isInternetConnected(Network.context)) {
+                        errorModel = ErrorModel(
+                            ErrorType.INTERNET,
+                            Network.context?.getString(R.string.gps_error_description),
+                            ErrorParams(
+                                Network.context?.getString(R.string.gps_error_heading),
+                                Network.context?.getString(R.string.gps_error_cta),
+                                ErrorActions.ENABLE_NETWORK,
+                                DisplayType.FULL_SCREEN
+                            )
+                        )
+                    }
                     val result =
-                        ApiResult.error(data = null, message = t.message ?: "", throwable = t)
+                        ApiResult.error(data = null, message = t.message ?: "", throwable = t, error = errorModel)
                     callback.onResponse(this@ResultCall, Response.success(result))
                 }
             }
