@@ -43,9 +43,9 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                     try {
                         errorModel =
                             Gson().fromJson(
-                                response.errorBody()!!.charStream(),
-                                ErrorModel::class.java
-                            )
+                                response.errorBody()!!.string(),
+                                ApiResult::class.java
+                            ).error
                     } catch (e: Exception) {
                     }
                     result = ApiResult.error(
