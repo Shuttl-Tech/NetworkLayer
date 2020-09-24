@@ -945,9 +945,9 @@
     <string name="title_wallet">बटुआ</string>
     <string name="title_freecharge_registration">फ्रीचार्ज पंजीकरण</string>
     <string name="title_add_money">पैसे जोड़ें</string>
-    <string name="gps_error_description">सटीक पिकअप के लिए Shuttl को अपने फ़ोन GPS चालू करने की अनुमति दें।</string>
-    <string name="gps_error_heading">कोई इंटरनेट कनेक्शन नहीं</string>
-    <string name="gps_error_cta">इंटरनेट चालू करें</string>
+    <string name="internet_error_description">सटीक पिकअप के लिए Shuttl को अपने फ़ोन GPS चालू करने की अनुमति दें।</string>
+    <string name="internet_error_heading">कोई इंटरनेट कनेक्शन नहीं</string>
+    <string name="internet_error_cta">इंटरनेट चालू करें</string>
 
     <string name="title_pass_details">विवरण पास करें</string>
     <string name="title_review_route_for">समीक्षा के लिए मार्ग</string>

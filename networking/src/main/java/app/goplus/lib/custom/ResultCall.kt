@@ -37,7 +37,7 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                 } else {
                     Network.reValidateUser(code)
                     var errorModel: ErrorModel? = null
-                    val body = response.body()
+                    val body = response.errorBody()
                     if (body is ApiResult<*>) {
                         errorModel = body.error
                     }
@@ -60,10 +60,10 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                     if (!NetworkUtils.isInternetConnected(Network.context)) {
                         errorModel = ErrorModel(
                             ErrorType.INTERNET,
-                            Network.context?.getString(R.string.gps_error_description),
+                            Network.context?.getString(R.string.internet_error_description),
                             ErrorParams(
-                                Network.context?.getString(R.string.gps_error_heading),
-                                Network.context?.getString(R.string.gps_error_cta),
+                                Network.context?.getString(R.string.internet_error_heading),
+                                Network.context?.getString(R.string.internet_error_cta),
                                 ErrorActions.ENABLE_NETWORK,
                                 DisplayType.FULL_SCREEN
                             )
