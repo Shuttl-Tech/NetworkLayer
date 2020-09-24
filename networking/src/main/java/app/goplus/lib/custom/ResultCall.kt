@@ -4,10 +4,13 @@ import app.goplus.lib.R
 import app.goplus.lib.models.*
 import app.goplus.lib.network.Network
 import app.goplus.lib.utils.NetworkUtils
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 import java.net.HttpURLConnection
+
 
 class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
     CallDelegate<T, ApiResult<*>>(proxy) {
@@ -37,9 +40,13 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                 } else {
                     Network.reValidateUser(code)
                     var errorModel: ErrorModel? = null
-                    val body = response.errorBody()
-                    if (body is ApiResult<*>) {
-                        errorModel = body.error
+                    try {
+                        errorModel =
+                            Gson().fromJson(
+                                response.errorBody()!!.charStream(),
+                                ErrorModel::class.java
+                            )
+                    } catch (e: Exception) {
                     }
                     result = ApiResult.error(
                         data = null,
