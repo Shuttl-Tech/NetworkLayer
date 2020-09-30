@@ -68,16 +68,16 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                         errorModel = ErrorModel(
                             ErrorType.INTERNET,
                             Network.context?.getString(R.string.internet_error_description),
-                            ErrorParams(
-                                Network.context?.getString(R.string.internet_error_heading),
-                                Network.context?.getString(R.string.internet_error_cta),
-                                ErrorActions.ENABLE_NETWORK,
-                                DisplayType.FULL_SCREEN
-                            )
+                            Network.context?.getString(R.string.internet_error_heading)
                         )
                     }
                     val result =
-                        ApiResult.error(data = null, message = t.message ?: "", throwable = t, error = errorModel)
+                        ApiResult.error(
+                            data = null,
+                            message = t.message ?: "",
+                            throwable = t,
+                            error = errorModel
+                        )
                     callback.onResponse(this@ResultCall, Response.success(result))
                 }
             }
