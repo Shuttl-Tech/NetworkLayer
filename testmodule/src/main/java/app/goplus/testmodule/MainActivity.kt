@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
             var data = service.getTestDataRetry()
 
-            Log.e("TestTag", "result is ${data.data?.success}")
+            Log.e("TestTag", "result is ${data.error?.message}")
         }
     }
 }

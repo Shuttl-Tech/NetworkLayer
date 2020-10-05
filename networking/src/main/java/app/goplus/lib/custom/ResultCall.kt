@@ -1,11 +1,16 @@
 package app.goplus.lib.custom
 
-import app.goplus.lib.models.ApiResult
+import app.goplus.lib.R
+import app.goplus.lib.models.*
 import app.goplus.lib.network.Network
+import app.goplus.lib.utils.NetworkUtils
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 import java.net.HttpURLConnection
+
 
 class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
     CallDelegate<T, ApiResult<*>>(proxy) {
@@ -34,10 +39,20 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
                     }
                 } else {
                     Network.reValidateUser(code)
+                    var errorModel: ErrorModel? = null
+                    try {
+                        errorModel =
+                            Gson().fromJson(
+                                response.errorBody()!!.string(),
+                                ApiResult::class.java
+                            ).error
+                    } catch (e: Exception) {
+                    }
                     result = ApiResult.error(
                         data = null,
                         message = response.message(),
-                        responseCode = code
+                        responseCode = code,
+                        error = errorModel
                     )
                 }
 
@@ -48,8 +63,21 @@ class ResultCall<T>(proxy: Call<T>, private val retryPolicy: RetryPolicy?) :
 
             override fun onFailure(call: Call<T>, t: Throwable) {
                 if (retryPolicy?.retry(proxy, this) != true) {
+                    var errorModel: ErrorModel? = null
+                    if (!NetworkUtils.isInternetConnected(Network.context)) {
+                        errorModel = ErrorModel(
+                            ErrorType.INTERNET,
+                            Network.context?.getString(R.string.internet_error_description),
+                            Network.context?.getString(R.string.internet_error_heading)
+                        )
+                    }
                     val result =
-                        ApiResult.error(data = null, message = t.message ?: "", throwable = t)
+                        ApiResult.error(
+                            data = null,
+                            message = t.message ?: "",
+                            throwable = t,
+                            error = errorModel
+                        )
                     callback.onResponse(this@ResultCall, Response.success(result))
                 }
             }

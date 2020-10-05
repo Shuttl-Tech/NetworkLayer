@@ -9,7 +9,8 @@ data class ApiResult<T>(
     val message: String? = null,
     val title: String? = null,
     val warningDTO: WarningDTO? = null,
-    val throwable: Throwable? = null
+    val throwable: Throwable? = null,
+    val error: ErrorModel? = null
 ) {
     companion object {
         fun <T> success(
@@ -23,7 +24,10 @@ data class ApiResult<T>(
             return ApiResult(
                 data,
                 title = title,
-                message = message
+                message = message,
+                errorCode = errorCode,
+                responseCode = responseCode,
+                warningDTO = warningDTO
             )
         }
 
@@ -33,7 +37,8 @@ data class ApiResult<T>(
             errorCode: String? = null,
             responseCode: Int? = 0,
             warningDTO: WarningDTO? = null,
-            throwable: Throwable? = null
+            throwable: Throwable? = null,
+            error: ErrorModel? = null
         ): ApiResult<T> {
             return ApiResult(
                 data = data,
@@ -42,7 +47,8 @@ data class ApiResult<T>(
                 responseCode = responseCode,
                 message = message,
                 warningDTO = warningDTO,
-                throwable = throwable
+                throwable = throwable,
+                error = error
             )
         }
     }
