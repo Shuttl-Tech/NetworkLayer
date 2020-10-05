@@ -1,6 +1,7 @@
 package app.goplus.lib.network
 
 import android.content.Context
+import okhttp3.Interceptor
 
 class Network {
     companion object {
@@ -29,6 +30,10 @@ class Network {
         fun getGoogleKey(): String? {
             return moduleDependency.getGoogleKeys()
         }
+
+        fun getExtraInterceptors(): List<Interceptor> {
+            return moduleDependency.getExtraInterceptors()
+        }
     }
 }
 
@@ -38,4 +43,5 @@ interface ModuleDependency {
     fun reValidateUer(code: Int)
     fun getGoogleKeys(): String?
     fun getAppContext(): Context
+    fun getExtraInterceptors(): List<Interceptor>
 }

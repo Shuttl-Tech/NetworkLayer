@@ -3,13 +3,13 @@ package app.goplus.lib.network
 import android.content.Context
 import android.os.Build
 import app.goplus.lib.BuildConfig
+import app.goplus.lib.custom.ResultCallAdapterFactory
 import app.goplus.lib.helpers.NoConnectivityException
 import app.goplus.lib.network.KeyType.Companion.googleReactive
 import app.goplus.lib.network.KeyType.Companion.normal
 import app.goplus.lib.network.KeyType.Companion.reactive
 import app.goplus.lib.network.KeyType.Companion.simple
 import app.goplus.lib.utils.NetworkUtils
-import app.goplus.lib.custom.ResultCallAdapterFactory
 import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -37,7 +37,12 @@ private val logging = HttpLoggingInterceptor()
  * @return
  */
 @JvmOverloads
-fun <S> generate(context: Context, type: String, serviceClass: Class<S>, responseTimeout: Long = TIMEOUT_RESPONSE): S {
+fun <S> generate(
+    context: Context,
+    type: String,
+    serviceClass: Class<S>,
+    responseTimeout: Long = TIMEOUT_RESPONSE
+): S {
     val key = getRetrofitKey(type, context)
     val retrofit: Retrofit = retrofitMap[key]
             ?: createRetrofit(context, type, responseTimeout).also { retrofitMap[key] = it }
@@ -46,9 +51,9 @@ fun <S> generate(context: Context, type: String, serviceClass: Class<S>, respons
 
 fun createRetrofit(context: Context, type: String, responseTimeout: Long): Retrofit {
     var builder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
-            .baseUrl(getIntendedUrl(context, type))
-            .client(getHttpClient(type, context, responseTimeout))
+        .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .baseUrl(getIntendedUrl(context, type))
+        .client(getHttpClient(type, context, responseTimeout))
 
     if (type == reactive || type == googleReactive) {
         builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -71,8 +76,8 @@ fun getIntendedUrl(context: Context, type: String = normal): String {
 private fun getHttpClient(objType: String, context: Context, responseTimeout: Long): OkHttpClient {
 
     var client = OkHttpClient.Builder()
-            .readTimeout(responseTimeout, TimeUnit.SECONDS)
-            .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
+        .readTimeout(responseTimeout, TimeUnit.SECONDS)
+        .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
 
 
     if (BuildConfig.BUILD_TYPE.equals(ENV_RELEASE, ignoreCase = true)) {
@@ -107,7 +112,9 @@ private fun getInterceptor(objType: String, context: Context): List<Interceptor>
         }
     }
     intercepters.add(logging)
-//    intercepters.add(ChuckerInterceptor(context))
+    for (interceptor in Network.getExtraInterceptors()) {
+        intercepters.add(interceptor)
+    }
     return intercepters
 }
 
@@ -115,13 +122,15 @@ private fun getInterceptor(objType: String, context: Context): List<Interceptor>
  * Helper class which performs the default tasks like adding query params to the [Interceptor]
  * for the GoogleDirectionsApi.
  */
-private class GoogleRequestHeaderInterceptor internal constructor(private val context: Context) : Interceptor {
+private class GoogleRequestHeaderInterceptor internal constructor(private val context: Context) :
+    Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
 
-        val url = request.url().newBuilder().addQueryParameter("key", Network.getGoogleKey()).build()
+        val url =
+            request.url().newBuilder().addQueryParameter("key", Network.getGoogleKey()).build()
         request = request.newBuilder().url(url).build()
         return chain.proceed(request)
     }
@@ -134,24 +143,18 @@ private class GoogleRequestHeaderInterceptor internal constructor(private val co
 private class RequestHeaderInterceptor internal constructor() : Interceptor {
 
 
-    private fun getUserAgentHeader(): String {
-        return String.format("shuttl-consumer/v%s (Android; %s)", BuildConfig.VERSION_NAME, Build.VERSION.RELEASE)
-    }
-
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 
         var builder = original.newBuilder()
-                .header("Accept", "application/json")
-                .addHeader("User-Agent", getUserAgentHeader())
-                .addHeader("Accept-Language", Locale.getDefault().toString())
-                .addHeader("timezone", TimeZone.getDefault().id)
-                .addHeader("platform", "Android")
-                .addHeader("appVersion", BuildConfig.VERSION_CODE.toString())
-                .addHeader("deviceModel", Build.MODEL)
-                .addHeader("deviceManufacturer", Build.MANUFACTURER)
-                .addHeader("deviceVersion", Build.VERSION.SDK_INT.toString())
+            .header("Accept", "application/json")
+            .addHeader("Accept-Language", Locale.getDefault().toString())
+            .addHeader("timezone", TimeZone.getDefault().id)
+            .addHeader("platform", "Android")
+            .addHeader("deviceModel", Build.MODEL)
+            .addHeader("deviceManufacturer", Build.MANUFACTURER)
+            .addHeader("deviceVersion", Build.VERSION.SDK_INT.toString())
 
         Network.getHeaders()?.let {
             for (pair in it) {
@@ -168,7 +171,8 @@ private class RequestHeaderInterceptor internal constructor() : Interceptor {
  * In case of no connectivity a [NoConnectivityException] is thrown and the
  * request chain is not proceeded.
  */
-private class ConnectivityInterceptor internal constructor(private val mContext: Context) : Interceptor {
+private class ConnectivityInterceptor internal constructor(private val mContext: Context) :
+    Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
