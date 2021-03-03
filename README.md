@@ -25,7 +25,7 @@ repositories {
 
 ```groovy
 dependencies {
-  implementation 'com.github.Shuttl-Tech:NetworkLayer:0.1.0-alpha2'
+  implementation 'com.github.Shuttl-Tech:NetworkLayer:0.1.3'
 }
 ```
 
