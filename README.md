@@ -12,8 +12,6 @@ A thin wrapper over retrofit that provides some extra functionality
 
 Network Layer simplifies the networking with easy to use interface.
 
-Apps using Wherro will run 2 services responsible for Location Syncing
-
 
 ## Getting Started 👣
 
