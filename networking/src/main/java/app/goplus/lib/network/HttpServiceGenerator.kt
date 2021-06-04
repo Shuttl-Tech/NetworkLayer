@@ -149,7 +149,7 @@ private class RequestHeaderInterceptor internal constructor() : Interceptor {
 
         var builder = original.newBuilder()
             .header("Accept", "application/json")
-            .addHeader("Accept-Language", Locale.getDefault().toString())
+            .addHeader("Accept-Language", Locale.getDefault().language)
             .addHeader("timezone", TimeZone.getDefault().id)
             .addHeader("platform", "Android")
             .addHeader("deviceModel", Build.MODEL)
